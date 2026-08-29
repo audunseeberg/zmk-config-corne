@@ -15,9 +15,21 @@
  *   ... US layers ...
  */
 
+/*
+ * Locale-dependent whole bindings used by shared layer fragments.
+ * These deliberately expand to complete behavior bindings rather than keycodes.
+ */
+#undef LOCALE_AE_BINDING
+#undef LOCALE_O_SLASH_BINDING
+#undef LOCALE_A_RING_BINDING
+
 #ifdef ZMK_KEYMAP_COMPAT_NB
 
 #include "keys_nb.h"
+
+#define LOCALE_AE_BINDING       &kp NB_AE
+#define LOCALE_O_SLASH_BINDING  &kp NB_O_SLASH
+#define LOCALE_A_RING_BINDING   &kp NB_A_RING
 
 #undef EXCLAMATION
 #define EXCLAMATION NB_EXCLAMATION
@@ -89,6 +101,13 @@
 #define QUESTION NB_QUESTION
 
 #else
+
+/* US has no direct æ/ø/å equivalents at these shared positions.
+ * Transparent bindings expose N/M/, from US_BASE instead.
+ */
+#define LOCALE_AE_BINDING       &trans
+#define LOCALE_O_SLASH_BINDING  &trans
+#define LOCALE_A_RING_BINDING   &trans
 
 /* Restore ZMK's standard US-semantic key definitions. */
 #undef EXCLAMATION

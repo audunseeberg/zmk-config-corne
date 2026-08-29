@@ -8,7 +8,7 @@
  * Default mode: Norwegian host layout.
  * Toggle US mode: hold Lower and press the far-right key on the home row
  *                 (the position that is ' on the base layer).
- * Norwegian extras: Lower + N/M/, => æ/ø/å.
+ * Norwegian extras: Lower + N/M/, => æ/ø/å directly in NB Lower.
  */
 
 #include <behaviors.dtsi>
@@ -25,7 +25,6 @@
 #define US_BASE  3
 #define US_LOWER 4
 #define US_RAISE 5
-#define NB_EXTRAS 6
 
 /* Compile the first group using Norwegian host-layout semantics. */
 #define ZMK_KEYMAP_COMPAT_NB
@@ -36,6 +35,19 @@
 #define RAISE_LAYER NB_RAISE
 
 / {
+    combos {
+        compatible = "zmk,combos";
+
+        space_combo {
+            bindings = <&kp SPACE>;
+            key-positions = <19 20 21>;
+        };
+
+        backspace_combo {
+            bindings = <&kp BACKSPACE>;
+            key-positions = <14 15 16>;
+        };
+    };
     keymap {
         compatible = "zmk,keymap";
 
@@ -79,19 +91,7 @@
 #include "layers/raise.inc"
         };
 
-        /* Norwegian-only characters, activated conditionally over NB Lower. */
-        nb_extras {
-            display-name = "NO ÆØÅ";
-#include "layers/nb_extras.inc"
-        };
     };
 
-    conditional_layers {
-        compatible = "zmk,conditional-layers";
-
-        nb_lower_extras {
-            if-layers = <NB_BASE NB_LOWER>;
-            then-layer = <NB_EXTRAS>;
-        };
-    };
 };
+
