@@ -40,12 +40,14 @@
 
         space_combo {
             bindings = <&kp SPACE>;
-            key-positions = <19 20 21>;
+            key-positions = <19 20>;
+            timeout-ms = <60>;
         };
 
         backspace_combo {
             bindings = <&kp BACKSPACE>;
-            key-positions = <14 15 16>;
+            key-positions = <15 16>;
+            timeout-ms = <60>;
         };
     };
     keymap {
