@@ -88,6 +88,16 @@
 #undef QUESTION
 #define QUESTION NB_QUESTION
 
+/* Locale-only Lower-layer bindings. These expand to complete ZMK behavior
+ * bindings because lower.inc is shared verbatim between locale variants.
+ */
+#undef LOCALE_AE_BINDING
+#define LOCALE_AE_BINDING &kp NB_AE
+#undef LOCALE_O_SLASH_BINDING
+#define LOCALE_O_SLASH_BINDING &kp NB_O_SLASH
+#undef LOCALE_A_RING_BINDING
+#define LOCALE_A_RING_BINDING &kp NB_A_RING
+
 #else
 
 /* Restore ZMK's standard US-semantic key definitions. */
@@ -159,5 +169,15 @@
 #define SLASH (ZMK_HID_USAGE(HID_USAGE_KEY, HID_USAGE_KEY_KEYBOARD_SLASH_AND_QUESTION_MARK))
 #undef QUESTION
 #define QUESTION (LS(ZMK_HID_USAGE(HID_USAGE_KEY, HID_USAGE_KEY_KEYBOARD_SLASH_AND_QUESTION_MARK)))
+
+/* In US mode the Norwegian-only positions are transparent, so the shared
+ * Lower layer falls through to the US base layer at M/comma/dot.
+ */
+#undef LOCALE_AE_BINDING
+#define LOCALE_AE_BINDING &trans
+#undef LOCALE_O_SLASH_BINDING
+#define LOCALE_O_SLASH_BINDING &trans
+#undef LOCALE_A_RING_BINDING
+#define LOCALE_A_RING_BINDING &trans
 
 #endif
